@@ -11,4 +11,4 @@ Fedora Kinoite based UBlue image with preinstalled software and restrictions for
 
 ## Restrictions
 
-To-Do
+uDev - Allow non root users to access USB based storage
