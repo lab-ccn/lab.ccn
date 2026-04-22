@@ -46,5 +46,6 @@ dnf5 -y install libreoffice
 dnf5 -y install putty
 dnf5 -y install remmina
 dnf5 -y install filezilla
+dnf5 -y install picocom
 
 echo 'SUBSYSTEMS=="usb", SUBSYSTEM=="block", TAG+="uaccess", MODE="660"' >> /etc/udev/rules.d/00-usb-permissions.rules
