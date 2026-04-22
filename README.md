@@ -20,6 +20,7 @@ Fedora Kinoite based UBlue image with preinstalled software and restrictions for
 
 Tidy Up
 Final additions or restrictions
+
 Any other tasks that we get tied up doing
 
 ## Settings/Restrictions
