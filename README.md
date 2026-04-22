@@ -16,6 +16,7 @@ Fedora Kinoite based UBlue image with preinstalled software and restrictions for
 - PuTTY
 - Cisco Packet Tracer
 - FileZilla
+- PicoCom
 
 ## TODO:
 
