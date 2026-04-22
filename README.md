@@ -4,14 +4,23 @@ Fedora Kinoite based UBlue image with preinstalled software and restrictions for
 
 ## Additions
 
-- LibreOffice
-- VirtualBox
-- Remmina
-- PuTTY
-
-## Additions - Work In Progress
+### Main Additions:
 
 - Cisco Packet Tracer
+- VirtualBox
+
+### Misc Additions
+
+- LibreOffice
+- Remmina
+- PuTTY
+- FileZilla
+
+## TODO:
+
+Tidy Up
+Final additions or restrictions
+Any other tasks that we get tied up doing
 
 ## Settings/Restrictions
 
