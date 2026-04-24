@@ -8,38 +8,31 @@ Fedora Kinoite based UBlue image with preinstalled software and restrictions for
 
 - Cisco Packet Tracer
 - VirtualBox
+- PicoCom
 
+  
 ### Misc Additions
 
 - LibreOffice
 - Remmina
 - PuTTY
-- Cisco Packet Tracer
-- VirtualBox
 - FileZilla
 - hyfetch
-- PicoCom
 - Btop
-- fastfetch
+- Fastfetch
 - Kitty
 - Chromium
-- tmux
-- bat
+- Tmux
+- Bat
 
 ## TODO:
 
-- Tidy Up
 - Final additions or restrictions
 - Any other tasks that we get tied up doing
 
 ## Settings/Restrictions
 
 USB Storage allowed for non root users
-
-## TODO:
-
-- Final additions or restrictions
-- Any other tasks that we get tied up doing
 
 ## Documentation
 
