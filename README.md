@@ -15,8 +15,22 @@ Fedora Kinoite based UBlue image with preinstalled software and restrictions for
 - Remmina
 - PuTTY
 - Cisco Packet Tracer
+- VirtualBox
 - FileZilla
+- hyfetch
 - PicoCom
+- Btop
+- fastfetch
+- Kitty
+- Chromium
+- tmux
+- bat
+
+## TODO:
+
+- Tidy Up
+- Final additions or restrictions
+- Any other tasks that we get tied up doing
 
 ## Settings/Restrictions
 
