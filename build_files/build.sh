@@ -3,9 +3,9 @@
 set -ouex pipefail
 
 # Enable RPMFusion repositories
-dnf install \
+dnf5 -y install \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-dnf install \
+dnf5 -y install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Virtualbox
