@@ -2,6 +2,15 @@
 
 set -ouex pipefail
 
+# Enable RPMFusion repositories
+dnf install \
+  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+dnf install \
+  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Virtualbox
+dnf5 -y install VirtualBox
+
 # Packet Tracer Dependencies
 dnf5 -y install qt5-qtnetworkauth qt5-qtscript qt5-qtmultimedia qt5-qtwebsockets qt5-qtwebengine
 # Download and extract packet tracer .deb archive
@@ -28,7 +37,6 @@ cp opt/pt/packettracer /usr/bin/
 # VirtualBox Dependencies
 #dnf5 -y install gcc kernel-headers kernel-devel
 # We can install VirtualBox itself just using the link to the RPM file
-dnf5 -y install VirtualBox
 
 # Additional Software
 dnf5 -y install libreoffice putty remmina filezilla tmux btop fastfetch hyfetch picocom bat kitty chromium
