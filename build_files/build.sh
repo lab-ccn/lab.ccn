@@ -26,7 +26,7 @@ Terminal=false
 cp opt/pt/packettracer /usr/bin/
 
 # VirtualBox Dependencies
-dnf5 -y install gcc kernel-headers
+dnf5 -y install gcc kernel-headers kernel-devel
 # We can install VirtualBox itself just using the link to the RPM file
 dnf5 -y install https://download.virtualbox.org/virtualbox/7.2.6/VirtualBox-7.2-7.2.6_172322_fedora40-1.x86_64.rpm
 
