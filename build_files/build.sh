@@ -9,7 +9,7 @@ dnf5 -y install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Virtualbox
-dnf5 -y install VirtualBox
+dnf5 -y install VirtualBox --skip-broken
 
 # Packet Tracer Dependencies
 dnf5 -y install qt5-qtnetworkauth qt5-qtscript qt5-qtmultimedia qt5-qtwebsockets qt5-qtwebengine
