@@ -9,7 +9,8 @@ dnf5 -y install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Virtualbox
-dnf -y install VirtualBox --exclude=akmod-VirtualBox
+dnf -y install akmod-VirtualBox
+dnf -y install VirtualBox
 # Packet Tracer Dependencies
 dnf5 -y install qt5-qtnetworkauth qt5-qtscript qt5-qtmultimedia qt5-qtwebsockets qt5-qtwebengine
 # Download and extract packet tracer .deb archive
