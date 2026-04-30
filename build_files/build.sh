@@ -1,8 +1,9 @@
 #!/bin/bash
 # search installed rpm packages for kernel to get version; `uname -r` does not work in a container environment
-KERNEL_VER="$(rpm -qa | grep -E 'kernel-[0-9].*?[.\\-]ba' | cut -d'-' -f2,3)"
+KERNEL_PKG_VER="$(rpm -q kernel)"
+KERNEL_VER="${$KERNEL_PKG_VER/#kernel-}"
 echo "$KERNEL_VER"
-echo "$(uname -r)"
+#echo "$(uname -r)"
 
 set -ouex pipefail
 
