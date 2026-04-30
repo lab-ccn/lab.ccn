@@ -1,17 +1,19 @@
 #!/bin/bash
-# search installed rpm packages for kernel to get version; `uname -r` does not work in a container environment
+
+# Gets the Linux Kernel version from the kernel package
 KERNEL_PKG_VER="$(rpm -q kernel)"
 KERNEL_VER=${KERNEL_PKG_VER#"kernel-"}
-echo "$KERNEL_VER"
-#echo "$(uname -r)"
 
 set -ouex pipefail
 
-# Virtualbox
-# Get current Fedora version
-
+# VirtualBox
+# TODO: This just downloads a hardcoded version and might be something to tweak later
 dnf5 -y install "https://download.virtualbox.org/virtualbox/7.2.8/VirtualBox-7.2-7.2.8_173730_fedora40-1.x86_64.rpm"
 
+# The kernel during a build is not the same as the resulting fedora kernel! 
+# This causes issues because the kernel version is taken from `uname -r` which would return the version of the runner the build is running on
+# Instead of that, this replaces it by hardcoding the kernel with `KERNEL_VER`
+# This function was originally from `https://github.com/ettfemnio/bazzite-virtualbox/blob/main/build.sh` with some fixes
 vbox_hardcode_kv () {
   local TARGET_FILE="$1"
   # sed expression to replace "uname -r" with "echo '[kernel version]'"
@@ -22,7 +24,7 @@ vbox_hardcode_kv () {
 }
 vbox_hardcode_kv /usr/lib/virtualbox/vboxdrv.sh
 vbox_hardcode_kv /usr/lib/virtualbox/check_module_dependencies.sh
-# run vboxconfig with KERN_VER set to build kernel modules
+# Run vboxconfig with KERN_VER set to build kernel modules
 dnf5 -y install dkms
 KERN_VER="$KERNEL_VER" /sbin/vboxconfig
 if [[ -e /var/log/vbox-setup.log ]]; then
@@ -35,6 +37,7 @@ vboxdrv
 vboxnetflt
 vboxnetflt
 EOF
+# TODO: Install VirtualBox extension pack?
 
 # Packet Tracer Dependencies
 dnf5 -y install qt5-qtnetworkauth qt5-qtscript qt5-qtmultimedia qt5-qtwebsockets qt5-qtwebengine
@@ -59,12 +62,9 @@ Terminal=false
 # Copy the packettracer start script into /usr/bin - You can't just run the binary directly on Fedora.
 cp opt/pt/packettracer /usr/bin/
 
-# VirtualBox Dependencies
-#dnf5 -y install gcc kernel-headers kernel-devel
-# We can install VirtualBox itself just using the link to the RPM file
-
 # Additional Software
 dnf5 -y install libreoffice putty remmina filezilla tmux btop fastfetch hyfetch picocom bat kitty chromium
+
 # System Restrictions
 # Gives non-root users access to USB block devices - But NOT internal drives
 echo 'SUBSYSTEMS=="usb", SUBSYSTEM=="block", TAG+="uaccess", MODE="660"' >> /etc/udev/rules.d/00-usb-permissions.rules
