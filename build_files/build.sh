@@ -1,7 +1,7 @@
 #!/bin/bash
 # search installed rpm packages for kernel to get version; `uname -r` does not work in a container environment
 KERNEL_PKG_VER="$(rpm -q kernel)"
-KERNEL_VER="${$KERNEL_PKG_VER/#kernel-}"
+KERNEL_VER=${KERNEL_PKG_VER#"kernel-"}
 echo "$KERNEL_VER"
 #echo "$(uname -r)"
 
