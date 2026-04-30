@@ -56,6 +56,7 @@ echo """
 Type=Application
 Name=Cisco Packet Tracer
 Exec=/usr/bin/packettracer
+Icon=/opt/pt/art/app.png
 StartupNotify=false
 Terminal=false
 """ >> /usr/share/applications/PacketTracer.desktop
