@@ -21,7 +21,7 @@ VIRTUALBOX_RPM_URL="https://download.virtualbox.org/virtualbox/7.2.8/VirtualBox-
 VIRTUALBOX_RPM="vbox.rpm"
 echo "Using '$VIRTUALBOX_RPM_URL' for Fedora $RELEASE"
 # download VirtualBox rpm
-curl -L -o "/tmp/$VIRTUALBOX_RPM" "https://download.virtualbox.org/virtualbox/$VIRTUALBOX_VER/$VIRTUALBOX_RPM"
+curl -L -o "/tmp/$VIRTUALBOX_RPM" "$VIRTUALBOX_RPM_URL"
 # install VirtualBox
 dnf install -y "/tmp/$VIRTUALBOX_RPM"
 
