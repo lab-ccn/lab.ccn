@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# search installed rpm packages for kernel to get version; `uname -r` does not work in a container environment
+KERNEL_VER="$(rpm -qa | grep -E 'kernel-[0-9].*?[.\\-]ba' | cut -d'-' -f2,3)"
 
 set -ouex pipefail
 
@@ -13,8 +14,6 @@ set -ouex pipefail
 # get current Fedora version
 RELEASE="$(rpm -E %fedora)"
 
-# search installed rpm packages for kernel to get version; `uname -r` does not work in a container environment
-KERNEL_VER="$(rpm -qa | grep -E 'kernel-[0-9].*?[.\\-]ba' | cut -d'-' -f2,3)"
 # install dkms
 dnf install -y dkms
 # get latest version number of VirtualBox
