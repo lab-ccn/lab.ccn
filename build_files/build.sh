@@ -4,26 +4,10 @@ KERNEL_VER="$(rpm -qa | grep -E 'kernel-[0-9].*?[.\\-]ba' | cut -d'-' -f2,3)"
 
 set -ouex pipefail
 
-# Enable RPMFusion repositories
-#dnf5 -y install \
-#  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-#dnf5 -y install \
-#  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
 # Virtualbox
-# get current Fedora version
-RELEASE="$(rpm -E %fedora)"
+# Get current Fedora version
 
-# install dkms
-dnf install -y dkms
-# get latest version number of VirtualBox
-VIRTUALBOX_RPM_URL="https://download.virtualbox.org/virtualbox/7.2.8/VirtualBox-7.2-7.2.8_173730_fedora40-1.x86_64.rpm"
-VIRTUALBOX_RPM="vbox.rpm"
-echo "Using '$VIRTUALBOX_RPM_URL' for Fedora $RELEASE"
-# download VirtualBox rpm
-curl -L -o "/tmp/$VIRTUALBOX_RPM" "$VIRTUALBOX_RPM_URL"
-# install VirtualBox
-dnf install -y "/tmp/$VIRTUALBOX_RPM"
+dnf5 -y install "https://download.virtualbox.org/virtualbox/7.2.8/VirtualBox-7.2-7.2.8_173730_fedora40-1.x86_64.rpm"
 
 vbox_hardcode_kv () {
   local TARGET_FILE="$1"
@@ -36,6 +20,7 @@ vbox_hardcode_kv () {
 vbox_hardcode_kv /usr/lib/virtualbox/vboxdrv.sh
 vbox_hardcode_kv /usr/lib/virtualbox/check_module_dependencies.sh
 # run vboxconfig with KERN_VER set to build kernel modules
+dnf5 -y install dkms
 KERN_VER="$KERNEL_VER" /sbin/vboxconfig
 if [[ -e /var/log/vbox-setup.log ]]; then
   cat /var/log/vbox-setup.log
