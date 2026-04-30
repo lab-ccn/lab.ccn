@@ -9,9 +9,27 @@ dnf5 -y install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Virtualbox
-curl "https://download.virtualbox.org/virtualbox/7.2.8/VirtualBox-7.2.8-173730-Linux_amd64.run" -o vbox.run
-chmod +x vbox.run
-./vbox.run
+dnf5 -y install "https://download.virtualbox.org/virtualbox/7.2.8/VirtualBox-7.2-7.2.8_173730_fedora40-1.x86_64.rpm"
+
+vbox_hardcode_kv () {
+  local TARGET_FILE="$1"
+  # sed expression to replace "uname -r" with "echo '[kernel version]'"
+  local EXPR_UNAME_R="s/uname -r/echo '$KERNEL_VER'/g"
+  # sed expression to replace "depmod -a" with "depmod -v '[kernel version]' -a"
+  local EXPR_DEPMOD_A="s/depmod -a/depmod -v '$KERNEL_VER' -a/g"
+  sed -i -e "$EXPR_UNAME_R" -e "$EXPR_DEPMOD_A" "$TARGET_FILE"
+}
+vbox_hardcode_kv /usr/lib/virtualbox/vboxdrv.sh
+vbox_hardcode_kv /usr/lib/virtualbox/check_module_dependencies.sh
+# run vboxconfig with KERN_VER set to build kernel modules
+KERN_VER="$KERNEL_VER" /sbin/vboxconfig
+mkdir -p /usr/lib/modules-load.d
+cat > /usr/lib/modules-load.d/kinoite-virtualbox.conf << EOF
+# load virtualbox kernel drivers
+vboxdrv
+vboxnetflt
+vboxnetflt
+EOF
 
 # Packet Tracer Dependencies
 dnf5 -y install qt5-qtnetworkauth qt5-qtscript qt5-qtmultimedia qt5-qtwebsockets qt5-qtwebengine
