@@ -26,6 +26,9 @@ vbox_hardcode_kv /usr/lib/virtualbox/vboxdrv.sh
 vbox_hardcode_kv /usr/lib/virtualbox/check_module_dependencies.sh
 # run vboxconfig with KERN_VER set to build kernel modules
 KERN_VER="$KERNEL_VER" /sbin/vboxconfig
+if [[ -e /var/log/vbox-setup.log ]]; then
+  cat /var/log/vbox-setup.log
+fi
 mkdir -p /usr/lib/modules-load.d
 cat > /usr/lib/modules-load.d/kinoite-virtualbox.conf << EOF
 # load virtualbox kernel drivers
