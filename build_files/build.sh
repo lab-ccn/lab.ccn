@@ -1,5 +1,7 @@
 #!/bin/bash
 
+KERNEL_VER="$(rpm -qa | grep -E 'kernel-[0-9].*?[.\\-]ba' | cut -d'-' -f2,3)"
+
 set -ouex pipefail
 
 # Enable RPMFusion repositories
