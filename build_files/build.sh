@@ -50,12 +50,12 @@ cp opt/pt/bin/PacketTracer /usr/lib/
 cp opt/pt/bin/libssl.so.1.1 /usr/lib
 cp opt/pt/bin/libcrypto.so.1.1 /usr/lib
 # Copy desktop entry for PacketTracer
-# TODO: Should add an icon
 echo """
 [Desktop Entry]
 Type=Application
 Name=Cisco Packet Tracer
 Exec=/usr/bin/packettracer
+Icon=/opt/pt/art/app.png
 StartupNotify=false
 Terminal=false
 """ >> /usr/share/applications/PacketTracer.desktop
