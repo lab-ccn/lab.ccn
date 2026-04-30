@@ -11,6 +11,7 @@ dnf5 -y install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Virtualbox
+dnf5 -y install gcc kernel-headers kernel-devel dkms
 dnf5 -y install "https://download.virtualbox.org/virtualbox/7.2.8/VirtualBox-7.2-7.2.8_173730_fedora40-1.x86_64.rpm"
 
 vbox_hardcode_kv () {
