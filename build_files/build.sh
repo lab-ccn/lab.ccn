@@ -18,22 +18,8 @@ KERNEL_VER="$(rpm -qa | grep -E 'kernel-[0-9].*?[.\\-]ba' | cut -d'-' -f2,3)"
 # install dkms
 dnf install -y dkms
 # get latest version number of VirtualBox
-VIRTUALBOX_VER="$(curl -L https://download.virtualbox.org/virtualbox/LATEST.TXT)"
-# URL to list of VirtualBox packages for latest version
-VIRTUALBOX_VER_URL="https://download.virtualbox.org/virtualbox/$VIRTUALBOX_VER/"
-# get all available VirtualBox Fedora rpm packages, sorted descending, and loop through them
-VIRTUALBOX_RPMS="$(curl -L "$VIRTUALBOX_VER_URL" | grep -E -o 'VirtualBox.+?fedora[0-9]+?-.+?\.x86_64\.rpm' | sed -E -e 's/">.*//' | sort -Vr)"
-for _VIRTUALBOX_RPM in $VIRTUALBOX_RPMS; do
-  # extract the Fedora version from the file name
-  FEDORA_VERSION="$(echo $_VIRTUALBOX_RPM | grep -E -o 'fedora[0-9]+' | grep -E -o '[0-9]+')"
-  # if <= $RELEASE, break
-  if [[ "$FEDORA_VERSION" -le "$RELEASE" ]]; then
-    VIRTUALBOX_RPM="$_VIRTUALBOX_RPM"
-    break
-  fi
-done
-# URL to VirtualBox rpm
-VIRTUALBOX_RPM_URL="$VIRTUALBOX_VER_URL$VIRTUALBOX_RPM"
+VIRTUALBOX_RPM_URL="https://download.virtualbox.org/virtualbox/7.2.8/VirtualBox-7.2-7.2.8_173730_fedora40-1.x86_64.rpm"
+VIRTUALBOX_RPM="vbox.rpm"
 echo "Using '$VIRTUALBOX_RPM_URL' for Fedora $RELEASE"
 # download VirtualBox rpm
 curl -L -o "/tmp/$VIRTUALBOX_RPM" "https://download.virtualbox.org/virtualbox/$VIRTUALBOX_VER/$VIRTUALBOX_RPM"
